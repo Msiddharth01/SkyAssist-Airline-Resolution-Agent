@@ -1,0 +1,53 @@
+{
+  "bookings": [
+    {
+      "pnr": "SK4821X",
+      "customerId": "priya_nair",
+      "flight": "SK-224",
+      "route": { "from": "Delhi", "to": "Goa" },
+      "date": "Wed 23 Sep 2026",
+      "scheduledDeparture": "14:40",
+      "status": "Cancelled",
+      "cancellationReason": "Operational reasons",
+      "airlineCaused": true,
+      "delayHours": null,
+      "newDeparture": null
+    },
+    {
+      "pnr": "SK4831X",
+      "customerId": "priya_nair",
+      "flight": "SK-031",
+      "route": { "from": "Goa", "to": "Delhi" },
+      "date": "Fri 25 Sep 2026",
+      "scheduledDeparture": "16:20",
+      "status": "Unaffected",
+      "airlineCaused": false,
+      "delayHours": null,
+      "newDeparture": null
+    },
+    {
+      "pnr": "TR11900",
+      "customerId": "arvind_kulkarni",
+      "flight": "SK-118",
+      "route": { "from": "Mumbai", "to": "Bengaluru" },
+      "date": "Wed 23 Sep 2026",
+      "scheduledDeparture": "07:10",
+      "status": "Delayed",
+      "airlineCaused": true,
+      "delayHours": 4,
+      "newDeparture": "11:10"
+    },
+    {
+      "pnr": "WL7742",
+      "customerId": "meher_kaur",
+      "flight": "SK-305",
+      "route": { "from": "Delhi", "to": "Hyderabad" },
+      "date": "Wed 23 Sep 2026",
+      "scheduledDeparture": "14:00",
+      "status": "Delayed",
+      "airlineCaused": true,
+      "delayHours": 6,
+      "newDeparture": "20:00"
+    }
+  ]
+}

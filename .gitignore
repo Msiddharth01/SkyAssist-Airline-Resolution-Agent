@@ -1,0 +1,6 @@
+node_modules
+.DS_Store
+dist
+.env
+backend/.env
+backend/data/audit/audit_log.json

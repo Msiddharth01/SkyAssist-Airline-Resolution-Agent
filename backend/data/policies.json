@@ -1,0 +1,71 @@
+{
+  "cancellationRebooking": {
+    "description": "If a flight is cancelled by the airline, customer gets a free rebooking on the next available flight within 24 hours, OR a full refund — customer's choice.",
+    "conditions": { "mustBeAirlineCaused": true },
+    "options": ["free_rebook_next_available_within_24h", "full_refund_to_original_payment"]
+  },
+  "delayCompensation": {
+    "tiers": [
+      {
+        "label": "Under 3 hours",
+        "condition": "delayHours < 3",
+        "compensation": ["meal_voucher_inr_500"]
+      },
+      {
+        "label": "More than 3 hours",
+        "condition": "delayHours > 3",
+        "compensation": ["meal_voucher", "lounge_access"]
+      },
+      {
+        "label": "More than 5 hours",
+        "condition": "delayHours > 5",
+        "compensation": ["meal_voucher", "lounge_access", "hotel_accommodation_delayed_hours_only"]
+      }
+    ],
+    "hotelNote": "Hotel covers ONLY the delayed hours, NOT a full night's stay."
+  },
+  "refundProcessing": {
+    "timeframeDays": 7,
+    "paymentMethod": "Original payment method ONLY — no exceptions"
+  },
+  "fareDifference": {
+    "description": "If customer voluntarily chooses a higher-fare flight, they pay the difference.",
+    "maxAgentWaivable": 1500,
+    "requiresSupervisorAbove": 1500,
+    "currency": "INR"
+  },
+  "loyaltyTierBenefits": {
+    "Platinum": {
+      "priorityRebooking": true,
+      "firstAccessToSeats": true,
+      "additionalCompensation": false
+    },
+    "Gold": {
+      "priorityRebooking": true,
+      "firstAccessToSeats": true,
+      "additionalCompensation": false
+    },
+    "Silver": {
+      "priorityRebooking": false,
+      "firstAccessToSeats": false,
+      "additionalCompensation": false
+    }
+  },
+  "allowedActions": [
+    "rebook_on_next_available_flight_free_of_charge",
+    "issue_meal_voucher",
+    "issue_lounge_access",
+    "arrange_hotel_for_delayed_hours_if_over_5h",
+    "initiate_refund_to_original_payment_method",
+    "provide_booking_and_flight_status"
+  ],
+  "prohibitedActions": [
+    "approve_compensation_beyond_stated_policy",
+    "waive_fare_difference_above_1500_inr",
+    "exceptions_for_non_airline_caused_disruptions",
+    "handle_legal_threats_must_escalate_immediately",
+    "process_refund_to_different_payment_method",
+    "provide_business_class_upgrade_as_compensation",
+    "grant_full_night_hotel_stay"
+  ]
+}

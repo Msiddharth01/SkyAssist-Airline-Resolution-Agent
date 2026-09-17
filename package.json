@@ -1,0 +1,14 @@
+{
+  "name": "skyassist-airline-resolution-agent",
+  "version": "1.0.0",
+  "description": "SkyAssist — Customer-Facing Resolution Agent for Airline Disruption (Assignment 3)",
+  "scripts": {
+    "install:all": "npm --prefix backend install && npm --prefix frontend install",
+    "dev:backend": "npm --prefix backend start",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "build:frontend": "npm --prefix frontend run build"
+  },
+  "keywords": ["airline-agent", "agentic-ai", "resolution-agent", "gemini-api"],
+  "author": "",
+  "license": "ISC"
+}
