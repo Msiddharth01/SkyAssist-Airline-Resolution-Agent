@@ -6,44 +6,9 @@ By decoupling policy rules from natural language generation, the system provides
 
 ---
 
-## 🏗️ System Architecture
-
-```mermaid
-flowchart TD
-    subgraph Client [Frontend — React 18 + Vite]
-        UI[Interactive Resolution Console]
-        CustomerSelector[Passenger Persona Selector]
-        AuditView[Live Policy & Action Inspector]
-    end
-
-    subgraph Server [Backend — Node.js & Express]
-        API[/api/chat/message]
-        PolicyEngine[Deterministic Policy Engine]
-        PromptEngine[Context & Guardrail Builder]
-        LLM[Gemini 2.0 Flash API]
-        ActionParser[Action & Escalation Parser]
-        AuditLogger[JSON Audit Trail Logger]
-    end
-
-    subgraph Storage [Data Store — JSON]
-        DB[(Flight & Passenger Records)]
-        AuditDB[(Audit Log Storage)]
-    end
-
-    UI --> API
-    API --> PolicyEngine
-    PolicyEngine --> DB
-    PolicyEngine --> PromptEngine
-    PromptEngine --> LLM
-    LLM --> ActionParser
-    ActionParser --> AuditLogger
-    AuditLogger --> AuditDB
-    ActionParser --> UI
-```
-
 ---
 
-## 🚀 Key Features
+## Key Features
 
 1. **Deterministic Policy Guardrails:**
    - Evaluates disruption rules in code before calling the LLM.
@@ -97,7 +62,7 @@ npm run dev
 
 ---
 
-## 📋 Disruption Scenarios Handled
+##  Disruption Scenarios Handled
 
 - **Scenario 1 — Flight Cancellation (Priya Nair, Gold Tier):**
   - Flight cancelled due to operational reasons.
@@ -111,5 +76,5 @@ npm run dev
 
 ---
 
-## 📄 License
+##  License
 MIT License. Built by Siddharth Malik.
