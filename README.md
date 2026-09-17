@@ -10,10 +10,10 @@
 
 | Requirement | Deliverable Link / Location |
 |---|---|
-| **1. GitHub Link** | Repository containing full source code (push this directory to your GitHub) |
+| **1. GitHub Link** | [https://github.com/Msiddharth01/SkyAssist-Airline-Resolution-Agent](https://github.com/Msiddharth01/SkyAssist-Airline-Resolution-Agent) |
 | **2. Demo Video** | Video recording walkthrough demonstrating Scenarios 1, 2, and 3 (upload to Google Drive with public access) |
-| **3. Architecture** | Detailed in [ARCHITECTURE.md](file:///Users/siddharth/Desktop/project%20company/ARCHITECTURE.md) and inside the in-app Architecture tab |
-| **4. 10-Slide PPT** | [PRESENTATION_DECK.md](file:///Users/siddharth/Desktop/project%20company/PRESENTATION_DECK.md) & Interactive Slide Deck in [slides/index.html](file:///Users/siddharth/Desktop/project%20company/slides/index.html) |
+| **3. Architecture** | Detailed in [ARCHITECTURE.md](ARCHITECTURE.md) and inside the in-app Architecture tab |
+| **4. 10-Slide PPT** | [PRESENTATION_DECK.md](PRESENTATION_DECK.md) & Interactive Slide Deck in [slides/index.html](slides/index.html) |
 
 ---
 
