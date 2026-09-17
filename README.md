@@ -27,7 +27,7 @@ By decoupling policy rules from natural language generation, the system provides
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 - **Frontend:** React 18, Vite, Lucide Icons, Custom CSS Design System
 - **Backend:** Node.js, Express, CORS, dotenv
