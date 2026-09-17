@@ -9,3 +9,5 @@ backend/data/audit/audit_log.json
 slides/
 DEMO_VIDEO_GUIDE.md
 PRESENTATION_DECK.md
+*.pptx
+generate_ppt.js

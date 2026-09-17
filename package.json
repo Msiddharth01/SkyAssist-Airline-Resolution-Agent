@@ -8,7 +8,15 @@
     "dev:frontend": "npm --prefix frontend run dev",
     "build:frontend": "npm --prefix frontend run build"
   },
-  "keywords": ["airline-agent", "agentic-ai", "resolution-agent", "gemini-api"],
+  "keywords": [
+    "airline-agent",
+    "agentic-ai",
+    "resolution-agent",
+    "gemini-api"
+  ],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "pptxgenjs": "^4.0.1"
+  }
 }
