@@ -37,7 +37,7 @@ By decoupling policy rules from natural language generation, the system provides
 
 ---
 
-## ⚡ Getting Started
+## Getting Started
 
 ### Prerequisites
 - Node.js 18+ and npm installed
