@@ -1,6 +1,5 @@
 # SkyAssist — Architecture & System Design Document
-**Assignment 3: Customer-Facing Resolution Agent (Airline Disruption)**
-**Cohort / Target:** AIONOS II Batch 2027
+*Autonomous Customer Resolution Agent for Airline Disruptions*
 
 ---
 

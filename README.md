@@ -1,83 +1,115 @@
-# SkyAssist: Customer-Facing Resolution Agent (Airline Disruption)
+# SkyAssist: AI-Powered Airline Disruption Resolution Agent
 
-> **Assignment 3 — Customer-Facing Resolution Agent**  
-> **Selection Round:** AIONOS II Batch 2027  
-> **Evaluation Date:** Wednesday, 23 September 2026 Simulation
+SkyAssist is a full-stack, autonomous customer resolution agent designed for airline disruption operations. It resolves complex flight cancellation and delay scenarios by combining an **isolated deterministic policy engine** with a generative LLM (`gemini-2.0-flash`).
 
----
-
-## 📌 Submission Checklist & Deliverables
-
-| Requirement | Deliverable Link / Location |
-|---|---|
-| **1. GitHub Link** | [https://github.com/Msiddharth01/SkyAssist-Airline-Resolution-Agent](https://github.com/Msiddharth01/SkyAssist-Airline-Resolution-Agent) |
-| **2. Demo Video** | Video recording walkthrough demonstrating Scenarios 1, 2, and 3 (upload to Google Drive with public access) |
-| **3. Architecture** | Detailed in [ARCHITECTURE.md](ARCHITECTURE.md) and inside the in-app Architecture tab |
-| **4. 10-Slide PPT** | [PRESENTATION_DECK.md](PRESENTATION_DECK.md) & Interactive Slide Deck in [slides/index.html](slides/index.html) |
+By decoupling policy rules from natural language generation, the system provides **zero-hallucination guarantees** on compensation, meal vouchers, hotel accommodations, and fee waivers while delivering empathetic, de-escalating customer communication.
 
 ---
 
-## 🚀 Tech Stack
+## 🏗️ System Architecture
 
-- **Frontend:** React 18 + Vite SPA with custom dark-themed airline design system.
-- **Backend:** Node.js + Express REST API.
-- **Data Store:** Grounded JSON data pack (`customers.json`, `bookings.json`, `policies.json`).
-- **Policy Engine:** Deterministic JavaScript rule evaluator enforcing hard compensation boundaries.
-- **AI / LLM:** Google Gemini API (`gemini-2.0-flash`) with intelligent fallback simulator for offline / zero-setup testing.
-- **Audit System:** Tamper-evident JSON event logger (`backend/data/audit/audit_log.json`).
-- **Client-Server Communication:** Axios HTTP client with Vite reverse proxy.
+```mermaid
+flowchart TD
+    subgraph Client [Frontend — React 18 + Vite]
+        UI[Interactive Resolution Console]
+        CustomerSelector[Passenger Persona Selector]
+        AuditView[Live Policy & Action Inspector]
+    end
+
+    subgraph Server [Backend — Node.js & Express]
+        API[/api/chat/message]
+        PolicyEngine[Deterministic Policy Engine]
+        PromptEngine[Context & Guardrail Builder]
+        LLM[Gemini 2.0 Flash API]
+        ActionParser[Action & Escalation Parser]
+        AuditLogger[JSON Audit Trail Logger]
+    end
+
+    subgraph Storage [Data Store — JSON]
+        DB[(Flight & Passenger Records)]
+        AuditDB[(Audit Log Storage)]
+    end
+
+    UI --> API
+    API --> PolicyEngine
+    PolicyEngine --> DB
+    PolicyEngine --> PromptEngine
+    PromptEngine --> LLM
+    LLM --> ActionParser
+    ActionParser --> AuditLogger
+    AuditLogger --> AuditDB
+    ActionParser --> UI
+```
 
 ---
 
-## ⚡ Quick Start (Run in 2 Steps)
+## 🚀 Key Features
 
-### 1. Start the Backend Server
+1. **Deterministic Policy Guardrails:**
+   - Evaluates disruption rules in code before calling the LLM.
+   - Enforces exact delay duration compensation ladders (e.g. ₹500 voucher for $<3\text{h}$, lounge access for $>3\text{h}$, hotel day-room for $>5\text{h}$).
+   - Restricts agent-authorized fare difference waivers to ₹1,500 maximum.
+
+2. **Automated Escalation Protocol:**
+   - Automatically detects unauthorized requests (e.g., fare differences exceeding ₹1,500, legal threats, formal complaints) and routes them to human supervisors.
+
+3. **Tamper-Evident Audit Trail:**
+   - Logs every conversation turn, resolved compensation action, and escalation event to a persistent JSON audit file.
+
+4. **Interactive Dashboard:**
+   - Built with React 18 and a custom airline theme.
+   - Includes real-time policy guardrail inspectors, loyalty tier indicators (Gold, Silver, Platinum), and live action logs.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Frontend:** React 18, Vite, Lucide Icons, Custom CSS Design System
+- **Backend:** Node.js, Express, CORS, dotenv
+- **AI / LLM:** Google Gemini API (`@google/generative-ai`) with resilient fallback simulator
+- **Data Layer:** JSON persistence (`customers.json`, `bookings.json`, `policies.json`, `audit_log.json`)
+- **API Client:** Axios
+
+---
+
+## ⚡ Getting Started
+
+### Prerequisites
+- Node.js 18+ and npm installed
+
+### 1. Backend Setup
 ```bash
 cd backend
 npm install
 npm start
 ```
 *Backend runs on `http://localhost:3001`.*  
-*(Optional: add your Gemini API Key in `backend/.env` as `GEMINI_API_KEY=your_key`. If omitted, the built-in deterministic simulator handles all scenarios automatically).*
+*(Optional: set `GEMINI_API_KEY` in `backend/.env`. If not set, the built-in deterministic simulator handles all policy rules automatically).*
 
-### 2. Start the Frontend Client
-In a separate terminal:
+### 2. Frontend Setup
+In a new terminal window:
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-*Open [http://localhost:5173](http://localhost:5173) in your browser.*
+*Open `http://localhost:5173` in your browser.*
 
 ---
 
-## 🎯 How the 3 Scenarios are Handled
+## 📋 Disruption Scenarios Handled
 
-### 1. Scenario 1 — Priya Nair (Gold Tier | PNR: SK4821X)
-- **Flight Status:** Flight SK-224 (Delhi → Goa) is **CANCELLED** due to operational reasons. Return flight SK-031 is unaffected.
-- **Customer Demand:** Furious. Wants a full cash refund **PLUS** a free upgrade to business class on her return flight.
-- **Agent Action:**
-  - Validates Gold loyalty and acknowledges disruption empathy.
-  - Offers free rebooking within 24h (with Gold priority seating) OR full refund to original payment within 7 business days.
-  - **Firmly denies** free business class cabin upgrade per airline service rules.
-
-### 2. Scenario 2 — Arvind Kulkarni (Silver Tier | PNR: TR11900)
-- **Flight Status:** Flight SK-118 (Mumbai → Bengaluru) is **DELAYED 4 HOURS** (revised departure: 11:10).
-- **Customer Demand:** Anxious about missing a connecting meeting; demands hotel accommodation.
-- **Agent Action:**
-  - Expresses sincere empathy for the meeting conflict.
-  - Proactively activates **₹500 meal voucher** and **airport lounge access** (applicable for delays > 3h).
-  - **Politely denies hotel accommodation**, explaining that hotel stays require delays > 5h.
-
-### 3. Scenario 3 — Meher Kaur (Platinum Tier | PNR: WL7742)
-- **Flight Status:** Flight SK-305 (Delhi → Hyderabad) is **DELAYED 6 HOURS** (revised departure: 20:00).
-- **Customer Demand:** Demands an overnight hotel stay (full night) and switch to a higher-fare flight where the fare difference is ₹2,000.
-- **Agent Action & Escalation:**
-  - Explains that delays > 5h cover day-room accommodation for the 6 delayed hours only, not a full night.
-  - Explains that the agent discretionary fare waiver limit is strictly **₹1,500**.
-  - **Triggers supervisor escalation** (`[ESCALATE]`), routing the ₹2,000 waiver request to human review.
+- **Scenario 1 — Flight Cancellation (Priya Nair, Gold Tier):**
+  - Flight cancelled due to operational reasons.
+  - Resolves full refund or 24-hour priority rebooking while strictly denying unauthorized cabin upgrades.
+- **Scenario 2 — 4-Hour Delay (Arvind Kulkarni, Silver Tier):**
+  - Flight delayed by 4 hours.
+  - Automatically issues meal voucher and lounge access while adhering to the rule that hotel stays require delays exceeding 5 hours.
+- **Scenario 3 — 6-Hour Delay & Fee Waiver (Meher Kaur, Platinum Tier):**
+  - Flight delayed by 6 hours with a request for a ₹2,000 fare difference waiver.
+  - Provides hotel accommodation for delayed hours only and escalates the ₹2,000 waiver request to a duty supervisor because it exceeds the ₹1,500 authorization ceiling.
 
 ---
 
-## 🖥️ Interactive Slide Presentation
-To view or present the required **10-slide PPT**, simply open `slides/index.html` in any web browser, or navigate with arrow keys / Spacebar.
+## 📄 License
+MIT License. Built by Siddharth Malik.

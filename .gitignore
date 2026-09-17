@@ -4,3 +4,8 @@ dist
 .env
 backend/.env
 backend/data/audit/audit_log.json
+
+# Local presentation & submission notes (kept local only)
+slides/
+DEMO_VIDEO_GUIDE.md
+PRESENTATION_DECK.md
