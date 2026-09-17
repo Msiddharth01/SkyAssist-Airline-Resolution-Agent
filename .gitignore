@@ -10,4 +10,6 @@ slides/
 DEMO_VIDEO_GUIDE.md
 PRESENTATION_DECK.md
 *.pptx
+*.pdf
 generate_ppt.js
+architecture_doc.html
